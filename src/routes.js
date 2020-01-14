@@ -1,5 +1,7 @@
 const routes = require('express').Router()
 
-routes.get('/', (req, res) => res.json({ project: 'Neardev' }))
+const DevController = require('./controllers/DevController')
+
+routes.post('/devs', DevController.store)
 
 module.exports = routes
