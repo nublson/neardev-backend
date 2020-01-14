@@ -1,6 +1,7 @@
 const axios = require('axios')
 
 const Dev = require('../models/Dev')
+const parseStringAsArray = require('../utils/parseStringAsArray')
 
 module.exports = {
 	async index(req, res) {
@@ -15,9 +16,7 @@ module.exports = {
 		let dev = await Dev.findOne({ github_username })
 
 		if (!dev) {
-			const techsArray = techs
-				.split(',')
-				.map(tech => tech.trim().toUpperCase())
+			const techsArray = parseStringAsArray(techs)
 
 			const response = await axios.get(
 				`https://api.github.com/users/${github_username}`
